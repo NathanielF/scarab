@@ -1,44 +1,32 @@
 {{ partial "header.html" . }}
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-    <div class="row">
-      <div class="col-md-6 col-md-offset-4 hidden-xs hidden-sm">
-        <p class="epigraph">
-          {{ .Site.Params.blogepigraph | safeHTML }}
-        </p>
-      </div>
-      <div class="col-md-6 col-md-offset-4 hidden-md hidden-lg text-right">
-        <p class="epigraph">
-          {{ .Site.Params.blogepigraph | safeHTML }}
-        </p>
-      </div>
+
+  <!-- Row -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
     </div>
+    <div class="col-md-10 col-md-offset-1">
 
-    <!-- Row -->
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
+      {{- range .Paginator.Pages }}
+      <div class="section-item">
+        <a href="{{ .Permalink }}">{{ partial "post-summary" (dict "context" . "leftcols" "4" "rightcols" "7") }}</a>
       </div>
-      <div class="col-md-10 col-md-offset-1">
+      {{- end }}
 
-        {{- range .Paginator.Pages }}
-        <div class="section-item">
-          <a href="{{ .Permalink }}">{{ partial "post-summary" (dict "context" . "leftcols" "4" "rightcols" "7") }}</a>
-        </div>
-        {{- end }}
-
-        <div class="text-center">
-          {{ partial "pagination.html" . }}
-        </div>
-
-        <div>
-          {{ partial "back-link" }}
-        </div>
-
+      <div class="text-center">
+        {{ partial "pagination.html" . }}
       </div>
+
+      <div>
+        {{ partial "back-link" }}
+      </div>
+
     </div>
-    <!-- /.row -->
+  </div>
+  <!-- /.row -->
 
 
-{{ partial "footer.html" . }}
+  {{ partial "footer.html" . }}

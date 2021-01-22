@@ -1,39 +1,26 @@
 {{ partial "header.html" . }}
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 hidden-xs hidden-sm">
-        <p class="epigraph">
-          {{ .Site.Params.researchepigraph | safeHTML }}
-        </p>
-      </div>
-      <div class="col-md-6 col-md-offset-4 hidden-md hidden-lg text-right">
-        <p class="epigraph">
-          {{ .Site.Params.researchepigraph | safeHTML }}
-        </p>
-      </div>
+  <!-- Row -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
     </div>
+    <div class="col-md-10 col-md-offset-1">
 
-    <!-- Row -->
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
+      {{- range .Data.Pages }}
+      <div class="section-item">
+        <a href="{{ .Permalink }}">{{ partial "publication-summary" . }}</a>
       </div>
-      <div class="col-md-10 col-md-offset-1">
+      {{- end }}
 
-        {{- range .Data.Pages }}
-        <div class="section-item">
-          <a href="{{ .Permalink }}">{{ partial "publication-summary" . }}</a>
-        </div>
-        {{- end }}
-        
-        <div>
-          {{ partial "back-link" }}
-        </div>
-
+      <div>
+        {{ partial "back-link" }}
       </div>
+
     </div>
-    <!-- /.row -->
+  </div>
+  <!-- /.row -->
 
-{{ partial "footer.html" . }}
+  {{ partial "footer.html" . }}

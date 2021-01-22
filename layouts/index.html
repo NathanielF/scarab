@@ -1,111 +1,118 @@
 {{ partial "header.html" . }}
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-    <!-- Row 1: Content -->
-    <div class="row">
+  <!-- Row 1: Content -->
+  <div class="row">
 
-      <div class="col-md-8">
-        <h1 class="area-header">Recent posts</h1>
-        {{- range first 3 ((where .Data.Pages.ByDate "Section" "post").Reverse) }}
-          {{ partial "post-summary" (dict "context" . "leftcols" "3" "rightcols" "8") }}
-        {{ end }}
-        <div class="row">
-          <div class="col-xs-12">
-            <a href="/post/" class="more-link">MORE POSTS &#8811;</a>
-          </div>
+    <div class="col-md-8">
+      <h1 class="area-header">Recent posts</h1>
+      {{- range first 3 ((where .Data.Pages.ByDate "Section" "post").Reverse) }}
+      {{ partial "post-summary" (dict "context" . "leftcols" "3" "rightcols" "8") }}
+      {{ end }}
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="/post/" class="more-link">MORE POSTS &#8811;</a>
         </div>
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <div>
-          <h1 class="area-header">Recent papers</h1>
-          <ul class="list-unstyled">
-            {{- range first 7 ((where .Data.Pages.ByDate "Section" "publication").Reverse) }}
-            <li>
-              <span class="pub-link">
+    <div class="col-md-4">
+      <div>
+        <h1 class="area-header">Long Form Writing</h1>
+        <ul class="list-unstyled">
+          {{- range first 7 ((where .Data.Pages.ByDate "Section" "publication").Reverse) }}
+          <li>
+            <span class="pub-link">
               {{- if isset .Params "pdf" }}
               <a href="{{ .Site.BaseURL }}pdf/{{ .Params.pdf }}">{{ .Title }}</a>
               {{- else }}
-              <a href="{{ .Params.puburl }}" target="_blank">{{ .Title }}</a>
+              <a href="{{ .Site.BaseURL }}publication/{{ .Params.page }}" target="_blank">{{ .Title }}</a>
               {{- end }}
-              </span>
-              <div><em>{{ .Params.venue }}</em></div>
-            </li>
-            {{- end }}
-          </ul>
-          <a href="/publication/" class="more-link">MORE PAPERS &#8811;</a>
-        </div>
+            </span>
+            <div><em>{{ .Params.desc }}</em></div>
+          </li>
+          {{- end }}
+        </ul>
+        <a href="/publication/" class="more-link">MORE PAPERS &#8811;</a>
+      </div>
 
-        <div class="row">
+      <div class="row">
         {{- range $index, $page := where .Data.Pages "Type" "extras" }}
         <div class="col-md-12 hanging-no-bullets">
           <h1 class="area-header">{{ $page.Params.heading | markdownify }}</h1>
           {{ $page.Content | markdownify }}
         </div>
         {{- end }}
-        </div>
       </div>
-
-    </div>
-
-    <hr class="hidden-sm hidden-xs">
-
-    <!-- Row #3: About -->
-    <div class="row">
-
-      <div class="col-md-4">
-        <h1 class="area-header">About</h1>
-        <p>
-          {{ .Site.Params.about }}
-        </p>
-      </div>
-
-      <div class="col-md-4 col-md-push-4">
-        <img src="{{ .Site.Params.avatar }}" class="img-circle">
-      </div>
-
-      <div class="col-md-4 col-md-pull-4">
-        <h2 class="hidden-sm hidden-xs">&nbsp;</h2>
-        <div class="hidden-lg hidden-md">&nbsp;</div>
-        <ul class="fa-ul">
-          {{- if .Site.Params.address }}
-          <li><i class="fa-li fa fa-university"></i>
-            {{ .Site.Params.address }}
-          </li>
-          {{- end }}
-          {{- if .Site.Params.email }}
-          <li><i class="fa-li fa fa-envelope"></i>
-            <a href="mailto:{{ .Site.Params.email }}">
-              {{ .Site.Params.email }}
-            </a>
-          </li>
-          {{- end }}
-          {{- if .Site.Params.github }}
-          <li><i class="fa-li fa fa-github"></i>
-            <a href="http://www.github.com/{{ .Site.Params.github }}">
-              On GitHub
-            </a>
-          </li>
-          {{- end }}
-          {{- if .Site.Params.twitter }}
-          <li><i class="fa-li fa fa-twitter"></i>
-            <a href="http://www.twitter.com/{{ .Site.Params.twitter }}">
-              @{{ .Site.Params.twitter }}
-            </a>
-          </li>
-          {{- end }}
-          {{- if .Site.Params.rss }}
-          <li><i class="fa-li fa fa-rss"></i>
-            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
-          </li>
-          {{- end }}
-        </ul>
-      </div>
-
     </div>
 
   </div>
+
+  <hr class="hidden-sm hidden-xs">
+
+  <!-- Row #3: About -->
+  <div class="row">
+
+    <div class="col-md-4">
+      <h1 class="area-header">About</h1>
+      <p>
+        {{ .Site.Params.about }}
+      </p>
+    </div>
+
+    <div class="col-md-4 col-md-push-4">
+      <img src="{{ .Site.Params.avatar }}" class="img-circle">
+    </div>
+
+    <div class="col-md-4 col-md-pull-4">
+      <h2 class="hidden-sm hidden-xs">&nbsp;</h2>
+      <div class="hidden-lg hidden-md">&nbsp;</div>
+      <ul class="fa-ul">
+        {{- if .Site.Params.address }}
+        <li><i class="fa-li fa fa-university"></i>
+          {{ .Site.Params.address }}
+        </li>
+        {{- end }}
+        {{- if .Site.Params.email }}
+        <li><i class="fa-li fa fa-envelope"></i>
+          <a href="mailto:{{ .Site.Params.email }}">
+            {{ .Site.Params.email }}
+          </a>
+        </li>
+        {{- end }}
+        {{- if .Site.Params.github }}
+        <li><i class="fa-li fa fa-github"></i>
+          <a href="http://www.github.com/{{ .Site.Params.github }}">
+            On GitHub
+          </a>
+        </li>
+        {{- end }}
+        {{- if .Site.Params.twitter }}
+        <li><i class="fa-li fa fa-twitter"></i>
+          <a href="http://www.twitter.com/{{ .Site.Params.twitter }}">
+            @{{ .Site.Params.twitter }}
+          </a>
+        </li>
+        {{- end }}
+        {{- if .Site.Params.linkedin}}
+        <li><i class="fa-li fa fa-linkedin"></i>
+          <a href="http://www.linkedin.com/in/{{ .Site.Params.linkedin }}">
+            On Linkedin
+          </a>
+        </li>
+        {{- end }}
+        {{- if .Site.Params.rss }}
+        <li><i class="fa-li fa fa-rss"></i>
+          <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+
+  </div>
+
+</div>
 
 {{ partial "footer.html" . }}

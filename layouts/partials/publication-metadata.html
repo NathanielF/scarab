@@ -2,16 +2,16 @@
 
   {{- if .Params.coauthors }}
   <div>
-  with
+    with
     {{- range .Params.coauthors }}
     <a href="{{ .url }}">{{ .name }}</a>
     {{- end }}
   </div>
   {{- end }}
 
-  {{- if isset .Params "venue" }}
+  {{- if isset .Params "desc" }}
   <div>
-    <em>{{ .Params.venue }}</em>
+    <em>{{ .Params.desc }}</em>
   </div>
   {{- end }}
 
@@ -26,8 +26,8 @@
   {{ if gt $tagsLen 0 }}
   <span class="post-tags">
     <span class="nowrap"><i class="fa fa-tags"></i>
-    {{ range $k, $v := $.Params.tags }}
-    <a class="post-tag" href="{{ $.Site.BaseURL }}tags/{{ . | urlize | lower }}">{{ . }}</a>{{ if lt $k (sub $tagsLen 1) }},{{ if eq 0 $k }}</span>{{ end}} {{ end }}
+      {{ range $k, $v := $.Params.tags }}
+      <a class="post-tag" href="{{ $.Site.BaseURL }}tags/{{ . | urlize | lower }}">{{ . }}</a>{{ if lt $k (sub $tagsLen 1) }},{{ if eq 0 $k }}</span>{{ end}} {{ end }}
     {{ end }}
   </span>
   {{ end }}
